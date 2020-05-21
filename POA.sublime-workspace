@@ -1,0 +1,643 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"net",
+				"netTable"
+			],
+			[
+				"hid",
+				"hidden_layer_size"
+			],
+			[
+				"The",
+				"Theta2"
+			],
+			[
+				"hi",
+				"hidden_layer_size"
+			],
+			[
+				"fp",
+				"fprintf"
+			],
+			[
+				"I",
+				"INIT_EPSILON"
+			],
+			[
+				"Th",
+				"Theta1"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"y",
+				"yval"
+			],
+			[
+				"else",
+				"elseif\telseif"
+			],
+			[
+				"sigma",
+				"sigma2"
+			],
+			[
+				"del",
+				"delta_small_3"
+			],
+			[
+				"a_",
+				"a_2"
+			],
+			[
+				"a",
+				"a_2"
+			],
+			[
+				"z_",
+				"z_2"
+			],
+			[
+				"si",
+				"sigmoid"
+			],
+			[
+				"th",
+				"Theta2_grad"
+			],
+			[
+				"de",
+				"delta_large_2"
+			],
+			[
+				"the",
+				"Theta2_grad"
+			],
+			[
+				"s",
+				"size"
+			],
+			[
+				"z",
+				"z_2"
+			],
+			[
+				"a3",
+				"a3"
+			],
+			[
+				"t",
+				"Theta1"
+			],
+			[
+				"Thet",
+				"Theta1"
+			],
+			[
+				"thet",
+				"Theta1"
+			],
+			[
+				"p",
+				"pTemp"
+			],
+			[
+				"max",
+				"max1"
+			],
+			[
+				"all",
+				"all_theta"
+			],
+			[
+				"num",
+				"num_labels"
+			],
+			[
+				"al",
+				"all_theta"
+			],
+			[
+				"nu",
+				"num_labels"
+			],
+			[
+				"for",
+				"forv\tVector For Loop"
+			],
+			[
+				"users",
+				"usersleft"
+			],
+			[
+				"re",
+				"responeid"
+			],
+			[
+				"use",
+				"userid"
+			],
+			[
+				"resp",
+				"responeid"
+			],
+			[
+				"arr",
+				"array"
+			],
+			[
+				"curr",
+				"currenttask"
+			],
+			[
+				"bal",
+				"baldata"
+			],
+			[
+				"update",
+				"updateUsId"
+			],
+			[
+				"ba",
+				"baldata"
+			],
+			[
+				"user",
+				"usersbought"
+			],
+			[
+				"balda",
+				"baldata"
+			],
+			[
+				"userin",
+				"userinfo"
+			],
+			[
+				"exp",
+				"expirydate"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"if",
+				"ifelse\tif … else …"
+			],
+			[
+				"expire",
+				"expiryDate"
+			],
+			[
+				"X",
+				"X_norm"
+			],
+			[
+				"paus",
+				"pause"
+			],
+			[
+				"ma",
+				"main\tmain()"
+			],
+			[
+				"m",
+				"main\tmain()"
+			],
+			[
+				"map",
+				"map\tstandard header"
+			],
+			[
+				"c",
+				"c"
+			],
+			[
+				"set",
+				"set1"
+			],
+			[
+				"co",
+				"const"
+			],
+			[
+				"im",
+				"imaginary"
+			],
+			[
+				"to",
+				"topIndex"
+			],
+			[
+				"is",
+				"is_less"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"sc",
+				"scale"
+			],
+			[
+				"mi",
+				"minIndex"
+			],
+			[
+				"min",
+				"min"
+			],
+			[
+				"cou",
+				"cout"
+			],
+			[
+				"b",
+				"bsearch"
+			],
+			[
+				"u",
+				"U"
+			],
+			[
+				"me",
+				"mergeSort"
+			],
+			[
+				"no",
+				"node_index"
+			],
+			[
+				"ro",
+				"root_index"
+			],
+			[
+				"roo",
+				"root_index"
+			],
+			[
+				"nod",
+				"nodes"
+			],
+			[
+				"n",
+				"node_index"
+			],
+			[
+				"bo",
+				"books_count"
+			],
+			[
+				"d",
+				"dept_library"
+			],
+			[
+				"bookId",
+				"bookID"
+			],
+			[
+				"BOO",
+				"books_count"
+			],
+			[
+				"boo",
+				"books_count"
+			],
+			[
+				"da",
+				"dept_library"
+			],
+			[
+				"st",
+				"stats"
+			],
+			[
+				"e",
+				"else"
+			],
+			[
+				"iss",
+				"issued"
+			],
+			[
+				"r",
+				"rating"
+			],
+			[
+				"mer",
+				"merge"
+			],
+			[
+				"f",
+				"factorial"
+			],
+			[
+				"te",
+				"testCase"
+			],
+			[
+				"sy",
+				"System"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"en",
+				"endl"
+			],
+			[
+				"ios",
+				"iostream\tstandard header"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"in",
+				"Indentation: Convert to Spaces"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"cout",
+			"hhdhfhf"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/nishantmittal/Documents/Summer Of Science/POA.tex",
+		"/Users/nishantmittal/Documents/Summer Of Science/test.tex",
+		"/Users/nishantmittal/Desktop/test.cpp",
+		"/Users/nishantmittal/Desktop/bleh.cpp",
+		"/Users/nishantmittal/Documents/LaTex/Hello.tex",
+		"/Users/nishantmittal/Documents/IITB/EE114/Assignment2_190070038.m",
+		"/Users/nishantmittal/Documents/IITB/EE114/Assignment2.m",
+		"/Users/nishantmittal/Documents/IITB/EE114/Assignment1.m",
+		"/Users/nishantmittal/Documents/ITSP/Control/fcn.matlab",
+		"/Users/nishantmittal/Documents/ITSP/Control/limitsignal.mat",
+		"/Users/nishantmittal/Documents/ITSP/Control/LQR.mat",
+		"/Users/nishantmittal/Desktop/Controls.mat",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/displayFigure.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/displayData.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/ex4.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/DigitDetection.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/nnCostFunction.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/fmincg.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/sigmoidGradient.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/randInitializeWeights.m",
+		"/Users/nishantmittal/Documents/Machine Learning/Digit Detection/ex4weights.mat",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex8/ex8/cofiCostFunc.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex8/ex8/ex8_cofi.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex8/ex8/selectThreshold.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex8/ex8/ex8.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex8/ex8/estimateGaussian.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex7/ex7/ex7_pca.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex7/ex7/pca.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex7/ex7/projectData.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex7/ex7/recoverData.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex4/ex4/checkNNGradients.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex4/ex4/ex4.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex4/ex4/randInitializeWeights.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex4/ex4/sigmoidGradient.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex4/ex4/nnCostFunction.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/oneVsAll.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex2/ex2/costFunctionReg.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/fmincg.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex2/ex2/costFunction.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/lrCostFunction.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/ex3.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/ex3_nn.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/predict.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex3/ex3/predictOneVsAll.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex2/ex2/ex2.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex2/ex2/ex2_reg.m",
+		"/Users/nishantmittal/Documents/Machine Learning/machine-learning-ex2/ex2/predict.m",
+		"/Users/nishantmittal/Unfurl/hiring/utils.php",
+		"/Users/nishantmittal/Unfurl/hiring/models/acmodel.php",
+		"/Users/nishantmittal/Unfurl/hiring/controllers/migratecontroller.php",
+		"/Users/nishantmittal/Unfurl/hiring/models/model.php",
+		"/Users/nishantmittal/Unfurl/hiring/controllers/cccontroller.php",
+		"/Users/nishantmittal/Documents/machine-learning-ex1/ex1/ex1.m",
+		"/Users/nishantmittal/Documents/machine-learning-ex1/ex1/featureNormalize.m",
+		"/Users/nishantmittal/Documents/machine-learning-ex1/ex1/ex1_multi.m",
+		"/Users/nishantmittal/Documents/machine-learning-ex1/ex1/warmUpExercise.m",
+		"/Users/nishantmittal/Desktop/squareThisNumber.m",
+		"/Users/nishantmittal/Desktop/poop.cpp",
+		"/Users/nishantmittal/Desktop/\\int.tex",
+		"/Users/nishantmittal/Desktop/Q6.cpp",
+		"/Users/nishantmittal/Desktop/poop2.cpp",
+		"/Users/nishantmittal/Desktop/190070038/string.cpp",
+		"/Users/nishantmittal/Desktop/p.cpp",
+		"/Users/nishantmittal/Programs/string.cpp",
+		"/Users/nishantmittal/Desktop/racket.cpp",
+		"/Users/nishantmittal/Desktop/Lab8 2/Solutions/q3.cpp",
+		"/Users/nishantmittal/Desktop/Lab8 2/Solutions/q2.cpp",
+		"/Users/nishantmittal/Desktop/Lab8 2/Solutions/q1.cpp",
+		"/Users/nishantmittal/Desktop/Practice.cpp",
+		"/Users/nishantmittal/Desktop/Pra.cpp",
+		"/Users/nishantmittal/Desktop/Lab8 2/Solutions/q5.cpp",
+		"/Users/nishantmittal/Desktop/Lab8 2/Solutions/q4.cpp",
+		"/Users/nishantmittal/Desktop/190070020/Q4.cpp",
+		"/Users/nishantmittal/Desktop/Lab_8_Q5.cpp",
+		"/Users/nishantmittal/Desktop/Practice/Q1.cpp",
+		"/Users/nishantmittal/Programs/Q3lab8.cpp",
+		"/Users/nishantmittal/Desktop/Practice/Q2.cpp",
+		"/Users/nishantmittal/Desktop/Labtest/Q1.cpp",
+		"/Users/nishantmittal/Programs/lab9Q1.cpp",
+		"/Users/nishantmittal/Programs/lab9Q2.cpp",
+		"/Users/nishantmittal/Desktop/Lab9/src/Q2/Q2.cpp",
+		"/Users/nishantmittal/Desktop/Lab9/src/Q1/Q1.cpp",
+		"/Users/nishantmittal/Desktop/Q2.cp",
+		"/Users/nishantmittal/Programs/Q2lab8.cpp",
+		"/Users/nishantmittal/Programs/Q4lab8.cpp",
+		"/Users/nishantmittal/Programs/Q1lab8.cpp",
+		"/Users/nishantmittal/Desktop/Q2 lab 7.cp",
+		"/Users/nishantmittal/Desktop/Practiv.cpp",
+		"/Users/nishantmittal/Desktop/Q4.cpp",
+		"/Users/nishantmittal/Desktop/TEsting.cpp",
+		"/Users/nishantmittal/Desktop/Q1.cpp",
+		"/Users/nishantmittal/Programs/PracticeQ1.cpp",
+		"/Users/nishantmittal/Programs/q1.cpp",
+		"/Users/nishantmittal/Programs/q4.cpp",
+		"/Users/nishantmittal/Desktop/LabQuiz.cpp",
+		"/Users/nishantmittal/Desktop/Hello world.java",
+		"/Users/nishantmittal/Desktop/Code.cpp",
+		"/Users/nishantmittal/Programs/Practice.cpp",
+		"/Practice.cpp",
+		"/Users/nishantmittal/Programs/SumOr.cpp",
+		"/Users/nishantmittal/Programs/Transmitter.cpp",
+		"/Users/nishantmittal/Programs/Reciever.cpp",
+		"/Users/nishantmittal/Programs/Extra.cpp",
+		"/Users/nishantmittal/Documents/Error.cpp",
+		"/Users/nishantmittal/Downloads/Lab4_L2/q4.cpp",
+		"/Users/nishantmittal/Documents/DectoBin.cpp",
+		"/Users/nishantmittal/Documents/DecToBin",
+		"/Users/nishantmittal/Desktop/untitled.cpp",
+		"/Users/nishantmittal/Desktop/hello world"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 128.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "POA.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 140.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

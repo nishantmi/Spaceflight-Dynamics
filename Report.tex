@@ -1,0 +1,751 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{bigints}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\graphicspath{ {images/} } 
+
+\title{\textbf{Spaceflight Dynamics}\\ 
+ 		\large{Midterm Report SOS $2020$}}
+\author{Nishant Mittal - $190070038$\\
+Mentor - Abhishek Raghuvanshi}
+\date{April 15th, 2020}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\maketitle
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=\textwidth]{cover}
+\end{figure}
+
+\begin{abstract}
+Spaceflight Dynamics is the science of spacecraft peformance, stability and control. It invloves he modeling of the changing position and orientation of a vehicle i.e. its trajectory via analysis of different ballistic and cellestial forces acting upon the six different degrees of freedom of a body. This project 
+\end{abstract}
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction - Setting up the Groundwork}
+\subsection{Particle Dynamics}
+To understand the dynmamics of a spcaecraft, we must first set up the basis of our study and laydown the basic tools we shall be using to understand and analyse more complex problems. It all starts with Newtons Three Laws:
+\begin{enumerate}
+
+	\item A particle at rest remains in rest, and a partical in motion remains in motion, if the applied force is zero.
+	\item The force on a particle equals the mass of the particle times its inertial acceleration.
+	\item For every force applied, there is an equal and opposite reaction force.
+
+\end{enumerate}
+
+I need not go into the details and explanation of these, we all know their implications, nuances and caveats. Another important set of laws in our analysis are the ones layed down by Keppler. They are as follows:
+\begin{enumerate}
+
+	\item The orbit of a planet is an ellipse with the Sun at one of the two foci.
+	\item A line segment joining a planet and the Sun sweeps out equal areas during equal intervals of time.
+	\item The square of the orbital period of a planet is directly proportional to the cube of the semi-major axis of its orbit.
+
+\end{enumerate}
+
+ These laws were written down by Keppler after detail study and observation of our solar system, hence they describe the motion of planets in our solar system. However these are applicable to a much more genral case of the Two Body Problem. We shall see the same in that section. I shall now focus on building upon the math involved in applying these laws when in frames other than the inertial frame.
+
+For starters, let us define the frame $i$ as the inertial frame and $s$ as the non-inertial frame. Now a vector $\mathbf{A}$ can be expressed in the inertial frame as:
+
+\begin{displaymath} \mathbf{A^i} = A_{i1}i_1 + A_{i2}i_2 + A_{i3}i_3 \end{displaymath}
+ 
+ where $i_1, i_2, i_3$ are a set of orthogonal basis vectors of the inertial frame. $\mathbf{A}$ can be represented in 
+ the non - inertial frame as:
+
+\begin{displaymath} \mathbf{A^s} = A_{s1}s_1 + A_{s2}i_2 + A_{s3}i_3 \end{displaymath}
+
+where $s_1, s_2, s_3$ are a set of orthogonal basis vectors of the non-inertial frame. These two expressions are just representations of a vector in two different frames of reference, but the vector itself exists independent of any frame. The coordinate $A_i$ and $A_s$ are simply representations of the same vector. Both are related via a rotation matrix as given below. 
+
+\begin{displaymath}
+	\begin{bmatrix} A_{i1} \\ A_{i2} \\ A_{i3} \end{bmatrix} 
+	=
+	\begin{bmatrix}
+	i_{1} \cdot s_{1} & i_{1} \cdot s_{2} & i_{1} \cdot s_{3}\\
+	i_{2} \cdot s_{1} & i_{2} \cdot s_{2} & i_{2} \cdot s_{3}\\
+	i_{3} \cdot s_{1} & i_{3} \cdot s_{2} & i_{3} \cdot s_{3}\\
+	\end{bmatrix}
+	\cdot
+	\begin{bmatrix}
+	A_{s1} \\ A_{s2} \\ A_{s3}
+	\end{bmatrix}
+\end{displaymath}
+\begin{displaymath}	\mathbf{A^i} = R^{si}\mathbf{A^s} \end{displaymath}
+
+Suppose the $\mathbf{A}$ vector represents distance. To calculate velocity and acceleration we must differentiate above equation. 
+
+\begin{displaymath}
+\frac{d}{dt}\mathbf{A^i} = \frac{d}{dt}(R^{si}\mathbf{A^s}) = \Dot{A^{si}}\mathbf{A^s} + R^{si}\Dot{\mathbf{A^s}}
+\end{displaymath}
+
+The rotation matrix when multiplied with its inverse or transpose, dissaperars. So we are left with:
+
+\begin{displaymath}
+\frac{{}^id}{dt}\mathbf{A} = \frac{{}^id}{dt}\mathbf{A} + R^{siT}\Dot{R^{si}}\mathbf{A^s}
+\end{displaymath}
+
+Now suppose the non-inertial frame is rotating with respect to the inertial frame with angular velocity $\mathbf{\omega^{si}}$. It can be shown that $R^{siT}\Dot{R^{si}} = \mathbf{\omega^{si}}$. As $\mathbf{A}$ can be any vector we can say that: 
+
+\begin{displaymath}
+\frac{{}^id}{dt}( ) = \frac{{}^id}{dt}( ) + \mathbf{\omega^{si}}\times()
+\end{displaymath}
+
+Similarly for acceleration, we must differentiate again. This gives us the following result:
+
+\begin{displaymath}
+\frac{{}^id^2}{dt^2}(\mathbf{R + r}) = \frac{{}^id^2}{dt^2}\mathbf{R} + \frac{{}^sd^2}{dt^2}\mathbf{r} + 2\mathbf{\omega^{si}}\times\frac{{}^sd}{dt}(\textbf{r}) + (\frac{{}^sd}{dt}\mathbf{\omega^{si}})\times\mathbf{r} + \mathbf{\omega^{si}}\times(\mathbf{\omega^{si}}\times\mathbf{r})
+\end{displaymath}
+Where $\mathbf{R}$ is the distance of the origin non-inertial frame from the origin of the inertial frame. What we have established so far along with a few high-school concepts shall make up our toolkit. Until now we have treated mass as dimensionless point partices, which is not the case in reality! We shall now see dynamics of systems if we consider the physical dimensions of the same.
+
+\subsection{Rigid Body Dynamics}
+
+A rigid body is generally a system with six degrees of freedom. Three degrees are related to the translational motion and the other three with rotational motion of the system. 
+
+\subsubsection{Translational Dynamics}
+
+On each particle in the system there will be internal and external forces acting upon it. Applying Netwton's second law to each particle in system and summing over all particles, we get:
+\begin{displaymath}
+\sum \mathbf{F_i} = \sum \mathbf{f_{int}} + \sum \mathbf{f_{ext}} = \sum m_i\mathbf{a_1}
+\end{displaymath}
+
+
+As the internal forces are equal and opposite in nature, the summation of internal forces over the entire system will amount to zero. We shall now define a new term called center of mass and its location $\mathbf{r_{cm}}$ is given as:
+\begin{displaymath}
+\mathbf{r_{cm}} = \frac{1}{M}\sum_{}^{} m_{i} \mathbf{r_{i}}
+\end{displaymath}
+ Combining the two equations we get:
+
+ \begin{displaymath}
+ \mathbf{F_e} = \sum \mathbf{f_{ext}} = \frac{d^2}{dt^2}\mathbf{r_{cm}}
+ \end{displaymath}
+
+This implies the center of mass behaves as if all the mass of the rigid body was concentrated there and all the external force was applied there.This covers the translational degrees of freedom. Note in the above formulation, if the system is a made up of a continous particle system, the summation is converted to an integral and $m_i$ to $dm$. Now to tackle the rotational degrees of freedom.
+
+\subsubsection{Rotational Dynamics}
+
+To analyse rotational dynamics, we must first encounter a quantity known as angular momentum($\mathbf{H}$). It is defined as follows:
+\begin{displaymath}
+\mathbf{H} = \int \mathbf{r} \times \mathbf{\omega} dm 
+\end{displaymath}
+Taking a referance frame tied to the body we get:
+\begin{displaymath}
+\mathbf{H} = \int \mathbf{r} \times (\mathbf{\omega^{bi}} \times \mathbf{r}) dm 
+\end{displaymath}
+
+where $\mathbf{\omega^{bi}}$ is the intertial angular velocity of the rigid body. We are now in a body frame of referance. Through splitting the terms into their components and further calculations we get:
+
+\begin{displaymath}
+\mathbf{H} = \bigintsss
+	\begin{bmatrix}
+	y^2 + z^2 & -yz &  -zx\\
+	 -xy &  z^2 + x^2 &  -zy\\
+	 -xy & -yz & x^2 + y^2\\
+	\end{bmatrix}
+	dm
+	\begin{bmatrix}
+	\omega_1\\
+	\omega_2\\
+	\omega_3\\
+	\end{bmatrix}
+\end{displaymath}
+
+Here we define a new quantity called moment of inertia(I) given as:
+
+\begin{displaymath}
+	I = 
+	\begin{bmatrix}
+	\int(y^2 + z^2)dm & \int(-yz)dm & \int(-zx)dm\\
+	\int(-xy)dm & \int(z^2 + x^2)dm & \int(-zy)dm\\
+	\int(-xy)dm & \int(-yz)dm & \int(x^2 + y^2)dm\\
+	\end{bmatrix}
+\end{displaymath}
+
+This gives us:
+
+\begin{displaymath}
+\mathbf{H} = I \mathbf{\omega^{bi}}
+\end{displaymath}
+
+Here \textbf{H} is not parallel to the angular velocity vector. This is not desirable. Thus we focus on a particular body frame called the pricipal axis frame. In this frame the moment of inertia tensor can be represented as a diagonal matrix. This frame can always be found by diagonalising the moment of inertia matrix via solving its charachteristic equation. We now move onto relating this with torque(\textbf{M}). Torque is generally given as:
+\begin{displaymath}
+\mathbf{M} = \frac{{}^id}{dt}\mathbf{H}
+\end{displaymath}
+
+Substituting the above equation for angular momentum and doing further calculations we get:
+
+\begin{displaymath}
+\mathbf{M} = I\dot{\mathbf{\omega^{bi}}} + \mathbf{\omega^{bi}}\times I \mathbf{\omega^{bi}}
+\end{displaymath}
+
+These give three non-linear first order differential equtions make up half of the equations required to fully describe the rotational motion of a system. To obtain the second half of the dynamics it is nicessary to introduce three angles specifying the orientation of the body with respect to the inertial frame and relate them to $\mathbf{\omega^{bi}}$. We shall do so using the classical euler angles: pitch, roll and yaw.
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width = 200px]{EulerAngles}
+    \caption{Euler's Angles}
+\end{figure}
+
+The Euler angles $\phi,\theta,\psi$ are shown in figure 1. The inertial frame is shown in blue while the body frame is in red. One goes from inertial frame to body frame by first rotating along the '\textbf{z}' axis by $\phi$ then about the node vector \textbf{N} by $\theta$ and finally about '\textbf{Z}' by $\psi$. The total rotation can be written as:
+
+\begin{displaymath}
+R^{ib} = R_3^{T}(\psi)R_1^{T}(\theta)R_1^{T}(\phi)
+\end{displaymath}
+
+Where $R_1$ and $R_3$ are elementary rotation matrices about the x and z axes repectively. Now from the figure we can write $\omega^{bi}$ as:
+
+\begin{displaymath}
+\mathbf{\omega^{bi}} = \dot{\phi}\mathbf{i_1} + \dot{\theta}\mathbf{n} + \dot{\psi}\mathbf{b_1}
+\end{displaymath}
+
+Upon further simplification, we can write $\omega^{bi}$ in its body frame components as:
+
+\begin{gather*}
+\omega_1 = \dot{\phi}sin{\theta}sin{\psi} + \dot{\theta}cos\psi\\
+\omega_2 = \dot{\phi}sin{\theta}cos{\psi} - \dot{\theta}sin\psi\\
+\omega_3 = \dot{\psi} + \dot{\phi}cos\theta
+\end{gather*}
+
+Also, via the differentiation rule and using the rotation matrix defined above, we can also get:
+
+\begin{displaymath}
+\dot{\mathbf{b_i}} = \mathbf{\omega^{bi}}\times\mathbf{b_i}
+\end{displaymath}
+
+These complete the necessary equations required to completely analyse the rotational motion of a system. There are other tequniques such as quaternion rotation that are alternatives to Euler's angles that are helpfull and advantageous in certin case senarios. Given this we are now ready to start further analysis of more complex systems. We shall start with the famous two body problem.
+
+\newpage
+\section{The Two Body Problem}
+ The two body problem is the simplest gravitational problem, just two point masses orbiting under their mutual gravitational attraction. The problem is to describe the motion of both objects given initial conditions. Let there be two masses with distances from a inertial origin as shown in Figure 2.
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width = 300px]{Twobodies}
+    \caption{Two particles as seen from inertial frame}
+\end{figure}
+
+By equating gravitational forces on each object:
+\begin{gather*}
+m_1\mathbf{\ddot{R}_{1}} = \frac{-Gm_1m_2}{|\mathbf{R_2} - \mathbf{R_1}|^3}(\mathbf{R_1} - \mathbf{R_2})\\
+m_2\mathbf{\ddot{R}_{2}} = \frac{-Gm_1m_2}{|\mathbf{R_2} - \mathbf{R_1}|^3}(\mathbf{R_2} - \mathbf{R_1})\\
+\end{gather*}
+
+Adding, we get:
+\begin{displaymath}
+m_1\mathbf{\ddot{R}_{1}}  + m_2\mathbf{\ddot{R}_{2}} = 0
+\end{displaymath}
+
+We also introduce another vector $\mathbf{R_{cm}}$ given as:
+\begin{gather*}
+\mathbf{R_{cm}} = \frac{m_1\mathbf{R_1}+m_2\mathbf{R_2}}{m_1 + m_2}
+\end{gather*}
+Hence, we get:
+\begin{gather*}
+\mathbf{\ddot{R}_{cm}} = 0 \\
+\mathbf{R_{cm}} = \mathbf{R_{cm0}} + \mathbf{V_{cm0}}t
+\end{gather*}
+
+Where $\mathbf{R_{cm0}}$ and $\mathbf{V_{cm0}}$ are the position and velocity vectors of the center of mass at $t=0$ and are constants. From Figure 2, $\mathbf{r} = \mathbf{R_2} - \mathbf{R_1}$ is obvious. By using the initial force equations, we can see:
+
+\begin{displaymath}
+m_1m_2 \mathbf{\ddot{r}} = \frac{-Gm_1m_2(m_1+m_2)}{r^3}\mathbf{r}
+\end{displaymath}
+
+Writing $\mu = G(m_1+m_2)$, we get:
+\begin{displaymath}
+\mathbf{\ddot{r}}  = \frac{-\mu\mathbf{r}}{r^3}
+\end{displaymath}
+
+This equation describes relative motion. Taking dot product of above equation with $\mathbf{\dot{r}}$ and further simplification, we get:
+
+\begin{gather*}
+\begin{split}
+\frac{d}{dt}\frac{1}{2}\dot{r}^2 & = - \frac{\mu}{r^2}\dot{r}\\
+								& = - \frac{d}{dt}\left(-\frac{\mu}{r}\right)
+\end{split}
+\end{gather*}
+
+Substituting,
+\begin{displaymath}
+V = -\frac{\mu}{r}
+\end{displaymath}
+
+Where V is the potential energy per unit mass, we get:
+\begin{displaymath}
+\mathcal{E} = \frac{1}{2}v^2 + V
+\end{displaymath}
+
+Hence the total energy is conserved. Note, here $\mathcal{E}$ represents the total energy per unit mass and not the entire mechanical energy. This is beneficial in some case senarios and can be easier to work with. We shall now attempt to find the orbit equation. To do this, take cross product with radius vector $\mathbf{r}$ on both sides of relative motion equation. The R.H.S goes to zero as cross product of vector with itself is zero. Integrating we get:
+
+\begin{displaymath}
+\mathbf{r}\times\mathbf{\dot{r}} = \mathbf{H}
+\end{displaymath}
+
+Here \textbf{H} is the angular momentum per unit mass which is again a constant. Here \textbf{H} is also equal to twice the rate of description of the position vector of $m_2$ with respect to $m_1$. This proves Keppler's second law. Now to solve the initial differntial equation, take right hand cross product of relative motion equation with \textbf{H}. Upon solving further, we get:
+
+\begin{displaymath}
+\mathbf{r} = \frac{\mathbf{H^2}/\mu}{1 + e\:cos\nu}
+\end{displaymath}
+
+Where $\mathbf{e}$ is a integration constant vector. It is termed as the \textit{eccentricity vector} and its scalar magnitude is simply the eccentricity of the orbit while direction is from the focus to the perigee of the orbit. The angle $\nu$ is the angle between the position vector($\mathbf{r}$) and the eccentricity vector and is termed as the \textit{true anomaly}. The above equation is the polar form of a conic section with the origin as one of the focii. If $e < 1$, the orbit is elliptical, $e = 1$ implies a parabolic orbit and $e > 1$ implies a hyperbolic orbit. We shall see indepth analysis of these in a later section. Now, the two body problem was completely solvable and we got a neat result. But real life has cerainly more than just two bodies. Let us now look into the N Body Problem.
+
+\subsection{The N Body Problem}
+
+We shall start by employing a route similar to that of the two body problem. Define $ \mathbf{r_{ij}} = \mathbf{R_{j}} - \mathbf{R_{i}}$. Applying Gravitational Law on each object:
+
+\begin{displaymath}
+m_i\mathbf{\ddot{r}_i} = \sum_{j \neq i}^{N} \frac{Gm_im_j}{r_{ij}^3}\mathbf{r_{ij}}
+\end{displaymath}
+
+When we sum all the above equations, the R.H.S goes to zero due to Newton's third law. All forces are equal and opposite and cancel each other out in the summation. We get:
+
+\begin{displaymath}
+\sum_{i=1}^{N} m_i\mathbf{\ddot{r}_i} = 0
+\end{displaymath}
+
+This leads us to:
+
+\begin{gather*}
+M\mathbf{\ddot{r}_{cm}} = 0\\
+\mathbf{r_{cm}}(t) = \mathbf{r_{cm0}} + \mathbf{V_{cm0}}t
+\end{gather*}
+
+Following the steps taken in the two body problems with a few minor modifications, we can obtain the following quantities:
+
+\begin{gather*}
+\mathbf{H} = \sum_{i=1}^{N} m_i\mathbf{r_i}\times\mathbf{\dot{r}_i}\\
+V = -\frac{1}{2}\sum_{i=1}^{N}\sum_{j \neq i}^{N}\frac{Gm_im_j}{r_{ij}}\\
+\mathcal{E} = \sum_{i=1}^{N}\frac{1}{2}m_i\mathbf{\dot{r}_i}\cdot\mathbf{\dot{r}_i} + V
+\end{gather*}
+
+This all we can absolutely determine for a N-Body system. Further solutions cannot be obtained "absolutely" and through various mathematical techniques and approximations, we can obtain models that nearly replicate real life systems. In the next section let's dive a bit deeper into the study of orbits.
+
+\newpage
+
+\section{More About Orbits}
+As seen in the previous section, the shape of the orbit largely depends on the value of the eccentricity vector. We shall now see the different shapes the orbits take on for different values of eccentricity as well as how the other physical quantites are limited and dependent by the orbit shape.
+\subsection{Conical Orbits}
+
+Conical orbits are simply the orbits that are obtained from slicing a cone at different angles with a plane. There are five resulting shapes namely: the circle, ellipse, parabola, hyperbola, and the straight line. The last is simply free fall and occurs when an object is simply dropped with no initial horizontal velocity hence it isn't a orbit per se. A circular orbit is perhaps the simplest orbit, occuring when $e=0$, it has uniform distance from the second object and uniform speed across its entire motion. Hence we shall not be discussing those two shapes here. Let us start from a bounded orbit.
+
+\subsubsection{Elliptical Orbit}
+
+This orbit is seen for cases when $e<1$. 
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{ellipse}
+    \label{fig:ellipse}
+    \caption{Elliptical Orbit}
+\end{figure}
+
+To begin, let's write out the ellipse relation: $b = a\sqrt{1-e^2}$. If we set $\nu = 90^\circ$, we get $p = H^2/\mu$. By pythagoras theorem, we get:
+\[
+	(2ae)^2 + p^2 = (2a -p)^2
+\] 
+This simplifies to:
+\[p=a(1-e^2)\]
+This also gives us:
+\[H = \sqrt{\mu p} = \sqrt{\mu a(1-e^2)}\]
+
+Note here perigee occurs at $\nu = 0^\circ$. Hence the eccentric vector is towards the right. Now as we have angular momentum, we can calculate the speed of the object at any point on the orbit. At the perigee, the velocity vector and postion vector are perpendicuar to each other. Hence:
+\begin{gather*}
+	\mathbf{H} = \mathbf{r\times v}\\
+	\implies H_p = r_pv_p\\
+	\implies v_p = \frac{\sqrt{\mu a(1-e^2)}}{r_p}
+\end{gather*}
+
+Using that in the energy relation, we get:
+\begin{gather*}
+\begin{split}
+	\mathcal{E} &= \frac{1}{2}v_p^2 - \frac{\mu}{r_p}\\
+	&= - \frac{\mu}{2a}
+\end{split}
+\end{gather*}
+
+Thus, we finally get:
+\[ v^2  = \mu \left(\frac{2}{r} - \frac{1}{a}\right) \]
+As the range of $r$ is from $r_p = a(1-e)$ to $r_a = a(1+e)$, we get the range of $v$ as $v_a = \sqrt{\frac{\mu}{a}\left(\frac{1-e}{1+e}\right)} $ to $v_p =  \sqrt{\frac{\mu}{a}\left(\frac{1+e}{1-e}\right)} $. If we put $e=0$, we get the velocity required for a circular orbit as:
+
+\[ v_c = \sqrt{\frac{\mu}{a}} \]
+\newpage
+\subsubsection{Parabolic Orbit}
+This orbit is seen for cases when $e=1$. 
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{parabola}
+    \label{fig:parabola}
+    \caption{Parabolic Orbit}
+\end{figure}
+We start by writing orbit equation:
+\[ r = \frac{H^2/\mu}{1+cos\nu} \]
+Solving at perigee:
+\begin{gather*}
+	a = \frac{H^2/\mu}{1+cos0^\circ}\\
+	\implies H = \sqrt{2\mu a}
+\end{gather*}
+
+As per previous working, this gives us:
+\[ v = \sqrt{\frac{2\mu}{r}} \]
+
+Hence if the velocity of release at perigee is $\sqrt{\frac{2\mu}{a}}$ the trajectory will be parabolic. Note that the velocity of the object at infinity is zero, hence this is also the minimun velocity with which the object must travel to escape the gravitational field of the other object. This is termed as escape velocity. Note that $v_e = \sqrt{2}v_c$.
+\newpage
+\subsubsection{Hyperbolic Orbit}
+This orbit is seen for cases when $e>1$. 
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{hyperbola}
+    \label{fig:hyperbola}
+    \caption{Hyperbolic Orbit}
+\end{figure}
+
+Again, working along the same lines as the previous orbits:
+\[ r = \frac{H^2/\mu}{1+e\:cos\nu} \]
+Solving at perigee:
+\begin{gather*}
+	a(e-1) = \frac{H^2/\mu}{1+e\:cos0^\circ}\\
+	\implies H = \sqrt{\mu a(1-e^2)}
+\end{gather*}
+Relating with energy equation, we get simillar results. The thing to be noted here is the non-zero velocity the object has as  it reaches infinity. This is called residual velocity and is given by:
+\[ 
+	v_\infty = \sqrt{\frac{\mu}{a}}
+\]
+
+If we got back to the orbit equation keeping in mind that $e>1$ we will see another notable fact. There is a maximum angle to which the object can go and the orbit is bounded by asymptotes as also seen in Figure 5. It is given by:
+\[
+	\nu_\infty = cos^{-1}\left( \frac{-1}{e} \right)
+\]
+
+\subsection{Orbital Elements}
+There are six parameters which completely define the orbit of an object. These are called orbital elements.
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{orbital_elements}
+    \label{fig:elements}
+    \caption{Orbital Elements}
+\end{figure}
+The xy plane is the equitorial plane of the Earth, while the z axis is along the rotation axis of Earth. The x axis is tid to the vernal equinox. This is taken as the base reference with respect to which, six parameters are defined according to Figure 6. The semimajor axis($a$) defines the size of the orbit while the eccentricity($e$) defines the shape of the orbit. Inclination($i$) is used to define the orientation of the orbit with respect to the Earth's equator. Argument of Perigee($\omega$) defines where the low point, or perigee, of the orbit is with respect to the Earth's surface. Right Ascension of the Ascending Node($\Omega$) defines the location of the ascending and descending orbit locations with respect to the Earth's equatorial plane and True/Mean Anomaly($\nu$) defines where the satellite is within the orbit with respect to perigee.
+
+\newpage
+\section{Some Title}
+\subsection{Aerodynamics}
+Rocket aerodynamics is the study of how air flows over a rocket and how this affects drag and stability. The nose cone and fins of a rocket are designed to minimise drag and to provide stability and control. The drag equation is given by:
+\[
+	F_{drag} = -\frac{1}{2}\: \rho \: C_d \: A v^2 \: \hat{\mathbf{v}}
+\]
+
+Where $C_d$ is the drag coefficient and depends on the geometry of the rocket(nose and fins influence this), A is the surface area, $\rho$ is the density of the medium in which the craft os travelling and $v$ is the velocity with which the craft is travelling. As is clear from the above equation, drag force is negligible beyond the exosphere where there is very low density of particles. An important concept in rocket stability is the center of pressure. It is the average point where which the force of the net pressure field in exerted. What this means for us is the point where the lift and drag forces act. Note that this point may not be(and often isn't) at the same position as the center of mass. For a rocket to be inherently stable the center of pressure must be closer to the tail than the center of mass while ascent. The further the are, the more stable the rocket is without external control systems. The following figures should explain:
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=150px]{stable}
+  \caption{Stable}
+  \label{fig:stable}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=150px]{unstable}
+  \caption{Unstable}
+  \label{fig:unstable}
+\end{subfigure}
+\caption{Center of Mass Position infulences natural stability}
+\label{fig:COP}
+\end{figure}
+
+As seen in \ref{fig:unstable}, having the center of pressure above the center of mass produces a torque about the center of mass whenever the rocket tilts over that contributes to the dstability and produces unchecked rotation. On the other hand, as shown in \ref{fig:stable}, having the center of pressure below the center of mass, the resulting torque is oriented to naturally pull the rocket back to the equilibrium(upright) position. The center of pressure is majorly influenced by the position and size of the tail fins along with the overall shape of the craft. The center of mass is as seen, dependent on the mass distribution along the craft. Beyond the exosphere, these discussions have little consequence, we shall see what does affect crafts in space.
+
+\subsection{A Few Considerations about Space}
+So a craft going to space faces a wide variety of problems. We'll discuss two of them here:
+
+\subsubsection{Spacecraft Temperature}
+Maintaining the temperature aboard a manned or numanned spacecraft is crucial to the corrrect functioning of the craft and survival of its occupants. We know that ideal absorbers are also ideal emitters. We can use this to design radiators that help maintain the temperature of a spacecraft. For ease of working and calculations, we assume our radiators to be ideal. The basic relation we use is the Stephen - Boltzmann Law:
+\[
+	E(T) = \sigma \:T^4 
+\]
+This law tells us the total energy emitted by the body at any given temperature. The constant $\sigma$ has a value of $5.672 \: \times \: 10^{-5} $ in cgs units. This law can be used to estimate the equilibrium temperature of a body. Let us take the example of the space shuttle to demonstrate. The space shuttle had flat plate radiators with coolant running begind them with an area of $111\: m^2$.
+They were placed underneath the payload bay doors and worked one at a time. Suppose they were exposed to the blackness of space, they would be mainly receiving starlight and the background radiation of about $3K$. Under these conditions:
+\[
+	E_{out} = \frac{1}{2}\sigma \:T^4 A= 2.55\: \times \: 10^{11} ergs/s \approx 25\:kW
+\] 
+So the shuttle caries off nearly a heat load of $25\:kW$ when facing empty space. Simillar calculations can show that when facing the Earth, the heat load is nearly $6.7\:kW$ and while facing the Sun(which is a perfect blackbody), the shuttle will be forced to absorb nearly $152\:kW$.
+
+\subsubsection{Radiation}
+
+Another problem crafts face in space is of particle radiation. High energy charged particles have devastating effects on the human DNA and have severe biological consequences definitely posing a threat to manned flight, but have troublesome effects on unmmaned vehicles as well. On Earth, we are protected by Earth's magnetic field and atmosphere. In space, within the Van Allen belts, there is little protection provided by the magnetic field, but beyond that fatal doses of radiation are a major threat to space exploration. To overcome this, we use shielding and clever postioning of structural components to provide maximum shielding while minimizing weight. However, skimping on material may cause more harm than good, as thin layers can create more radiation via pair production! It is not feasible to shield the entire craft with thick layers to provide protections against solar flares and larger doses of radiation. Hence for long distance journeys, a "storm shelter" has been proposed, which is simply a heavily shielded space where the crew can live for a few days on end. 
+
+As mentioned above, radiation can also cause difficulties with electronic equipments. Most chips are made by doping a perfect crystal lattice of a semiconductor to introduce inperfections. When charged particles travel throught these lattices, they interact mainly with the imperfections. This can cause many errors within the circuitry. There is also problems of static charge accumulation that can short out and potentially destroy all the circuitry aboard.
+
+\newpage
+\section{Inter - Planetary Motion}
+
+The ultimate goal of our work here is to explore new worlds and planets. To do that we must devise an optimal way to get there! Plotting interplanetary trajectories is as simple as solving the N - Body problem but as we have seen before, there is unfortunately no closed solution to the aforementioned problem. Hence we have come up with an approximation technique called \textit{The Sphere of Activity} or the concept of \textit{Patched Conics}. The idea is simple, after a certain distance from any stellar object, the gravitational force asserted by said body is overshadowed by the force of another object, but within that distance, the original object's force dominates. Keeping this in mind, the N - Body problem could be approximated down to different two body problems. When in the sphere of activity of one object, the motion of a spacecraft could be approximated to a two body system. We shall now see a brief proof of the same.
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 300px]{ASphere}
+    \label{fig:ASphere}
+    \caption{Activity Sphere Proof}
+\end{figure}
+
+Taking assumptions as in diagram and assuming the test mass to be "in equilibrium", we can write the net inertial acceleration of the test mass between the Earth and the Sun as:
+\[
+	\mathbf{a_g} = -\frac{GM\mathbf{i}}{(R-r)^2} + \frac{Gm\mathbf{i}}{r^2}
+\]
+
+The Earth has an angular velocity of:
+\[
+	\omega = \left(\frac{GM}{R^3}\right)^{1/2} \: \mathbf{k}
+\]
+The centripetal acceleration of the mass can be written as:
+\begin{equation}
+\begin{split}
+	\mathbf{a} & = \omega \times(\omega \times (\mathbf{R} - \mathbf{r}))\\
+				& = - \frac{GM}{R^3}(R - r)\mathbf{i}
+\end{split}
+\end{equation}
+
+As the mass is in "equilibrium" i.e. at rest when seen form the rotating frame, equating the centripetal acceleration to the inertial acceleration and applying bnomial approximation gives us the following result:
+
+\[
+	\frac{r}{R} = \left( \frac{m}{3M} \right)^{1/3}
+\]
+
+Now, when this equation is used to calculate the radii of objects in our solar system, it is shown that our earlier approximation holds good for planets and our Sun. Yet the concept of a sphere of activity cannot be applied to systems such as the Earth and its moon. Having this in place we shall now see the concept of Hohmann Transfer.
+
+\subsection{Hohmann Transfer}
+Hohmann Transfer is a method devised to transfer from one planetary orbit to another. It is a simple matter of velocity manipulation at the perigee and apogee of an elliptical orbit connecting two circular orbits as shown in the figure below. 
+
+\begin{figure}[h!]
+	\centering
+    \includegraphics[width = 130px]{Hohmann}
+    \label{fig:Hohmann}
+    \caption{Hohmann Transfer}
+\end{figure}
+
+We've already discussed the underlying concepts and building upon them to derive the necessary increase and decrease in velocity is a trivial matter. Considering $a_t = (R + R')/2$, it can be easily derived that the time taken to transfer from one orbit to another is given by:
+
+\[
+	T_{12} = \pi \left(\frac{a_t^3}{\mu}\right)^{1/2}
+\]
+
+The Hohmann Transfer fixates on being a method which requires the least amount of energy, the handoff being it requires the greatest amount of time to perform. If we consider the Sun as our center and use a Hohmann Transfer from Earth's orbit to that of Mars, we get a transfer time of about 258 days. At this magnitude of a time frame another problem arises, the time and place at which the craft must be released from Earth's orbit must be planned to intercept Mars when the craft reaches Mars's orbit. This gives motive to look into the concept of Launch Windows.
+
+\subsection{Launch Windows}
+\begin{figure}[h!]
+	\centering
+    \includegraphics[width = 200px]{Mars}
+    \label{fig:Mars}
+    \caption{Earth to Mars Transfer}
+\end{figure}
+
+There needs to be certain angular relationship between the two planets for the transfer to work. Considering the receiving planet(here Mars) goes on a nearly circular orbit for the duration of the transfer, the relationship can be easily determined as:
+\[
+	\gamma = \pi - \omega_{t} T_{12}
+\]
+
+The time when this relationship is nearly in place is called the Launch Window for the transfer. Taking this into account, around trip journey from Mars is estimated to be about 4 years in total! This is not acceptable. Planetary Flybys' are used to keep the energy requirement at a  low while reducing the time required for deep space missions.
+
+\subsection{Planetary Flby}
+
+The radius of the activity sphere is considerably larger than that of the planet, hence it is a safe approximation to say that the velocity of the craft at the border of the activity sphere would be similar to that of a hyperbola at $\infty$. I.e. the magnitude of the velocity would be $v_{\infty}$(as derived in earlier sections), and its angle of approach would be equal to $cos^{-1}(-1/e)$. Now whenever we cross the activation sphere, our system shifts from the heliocentric view to the planetary view or vice verca. 
+
+\begin{figure}[h!]
+	\centering
+    \includegraphics[width = 200px]{Flyby}
+    \label{fig:Flyby}
+    \caption{How Flybys affect velocity}
+\end{figure}
+
+In the figure, $\mathbf{V_p}$ is the velocity of the planet w.r.t the Sun. Simillarly, $\mathbf{V_1}$ and $\mathbf{V_2}$ are the velocities of the craft before and after the flyby. Writing the eqations:
+
+\[
+	\mathbf{v_1 = V_1  - V_p}
+\]
+\[
+	\mathbf{V_2 = v_2  + V_p}
+\]
+
+Although $ |\mathbf{v_1}| = |\mathbf{v_2}|  = v_\infty$, the direction of both velocities can differ greatly in terms of both magnitude and direction after the flyby. If the heliocentric velocity is considerably increased after the flyby it is termed as a \textit{trailing side} flyby and \textit{leading side} flyby if the velocity is reduced in magnitude. These both are useful in different cases. If the pupose was simply to change direction, provide speed and head to a different end destination, the trailing side might be prefered. But if the purpose was to perform a scientific flyby, the velocity after the flyby is of little consequence.
+
+\newpage
+\section{Rocket Dynamics}
+In this section, we shall look at how rockets are actually propelled, a few considerations taken while designing one and the various nuances of the field. 
+\subsection{The Rocket Equation}
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{rocket_thrust}
+    \label{fig:rt}
+    \caption{Momentum Conservation}
+\end{figure}
+
+The velocity $\mathbf{V_e}$ is relative to to the craft, applying momentum converstion:
+
+\[
+	(m + dm)(\mathbf{v} + \mathbf{dv}) -dm(\mathbf{v} + \mathbf{V_e}) = m\mathbf{v}
+\]
+\[
+	md\mathbf{v} -dm\mathbf{V_e} = 0
+\]
+Divide by $dt$, we get the final equation:
+\[
+	\mathbf{F_{ext}} + \frac{dm}{dt}\mathbf{V_e} = m\mathbf{a}
+\]
+
+This is the rocket equation but is yet incomplete. We assumed the ejected gasses are at the same pressure as the atmosphere. If they are different, there is a correction factor:
+
+\[
+	\mathbf{F_{ext}} + \frac{dm}{dt}\mathbf{V_e} - A(P_e - P_a)\mathbf{\hat{V}_e} = m\mathbf{a}
+\]
+As can be seen clearly from the above equation, the performance would be better within the atmosphere than in outer space. Obviously this is a problem as any rocket spends only a small fraction of its life in the atmosphere. We shall address this problem later on. First, let's define some terms that will help us later on.\\
+A rocket's mass is made up of primarily three things: the propelant($m_p$), the body($m_s$) and the payload($m_*$). A payload ratio is defined as:
+\[
+	\pi = \frac{m_*}{m_0}
+\]
+And the structural ratio as:
+\[
+	\epsilon = \frac{m_s}{m_s+_p}
+\]
+Another quantity called the effective exit velocity is given as:
+\[
+	V_{e,eff} = V_e - \frac{A}{dm/dt}(P_e - P_a)
+\]
+
+Using the newly defined quantities, we can easily integrate our rocket equation. Considering the rocket is in free space with the exhaust pressure dropped to zero, we get:
+\[
+	v(t) = V_eln\frac{m_0}{m(t)}
+\]
+The burnout velocity i.e. the velocity of the craft when all the fuel runs out is given by:
+
+\[
+	v_b = -V_eln(\epsilon + (1-\epsilon) \pi)
+\]
+
+Very clearly, the performance of the rocket depends largely on the structural mass, and hence getting rid of unneccesary weight is crucial for better results. This leads to the concept of multi-stage rockets.
+
+\subsection{Multistage Rockets}
+In multistage rockets, initial stages required to provide enough thrust for liftoff are shed when emptied, thereby reducing the amount of parasitic mass. The initial mass of the $k^{th}$ stage($m_{0,k} $) includes the mass of everything above the seperation stage for that plane. The final mass of the $k^{th}$ stage($m_{fk} $) is the structural mass of that stage plus the mass of the stages left. Thus definitions are now:
+
+\[
+	\epsilon_k = \frac{m_{sk}}{m_{sk} + m_{pk}}
+\] 
+
+\[
+	\pi_k = \frac{m_{0,k+1}}{m_{0,k}}
+\]
+
+With these definitions, each stage can be treated as a single stage rocket. Hence we can apply the previous equation to get the net burnout velocity or the velocity of the payload deployed as:
+\[
+	V_* = - \sum_{k=1}^{N} V_{ek}ln(\epsilon_k + (1-\epsilon_k) \pi_k)
+\]
+
+We now wish to optimize the staging to obtain the greatest payload mass for a given vehicle mass. Note that $V_{ek}$ cannot be mathematically optimized, it is a physical constraint while trying to optimize $\epsilon_{k}$ would yield $0$. The only parameter we can control is $\pi_k$ and it represents the mass distribution amongst the various stages.
+
+\[
+	ln\pi_* = \sum_{k=1}^{N} ln\pi_k
+\]
+
+This is waht we must maximize with the constraint as the earlier equation. We have (N - 1) independent quantities which we can change. We can use the method of Lagrange Multiplier to solve this optimization problem.
+
+\[
+	ln\pi_* = \sum_{k=1}^{N}\left( ln\pi_k + \lambda \left\{ \frac{V_*}{N} + V_{ek}ln(\epsilon_k + (1-\epsilon_k) \pi_k) \right\} \right) 
+\]
+
+Now calculating the partial derivatives:
+\[
+	\frac{\partial ln\pi_*}{\partial ln\pi_k} = \frac{1}{\pi_k} + \frac{\lambda V_{ek}(1 - \epsilon_k)}{\epsilon_k + (1-\epsilon_k) \pi_k} = 0
+\]
+
+Solving according to the method, we get:
+
+\[
+	V_* = - \sum_{k=1}^{N} V_{ek} ln\left( \epsilon_k - \frac{\epsilon_k}{1 + \lambda V_{ek}} \right)
+\]
+This can be solved via numerical techniques and back substituted to get $\pi_k$ for every k.\\
+
+The multistage rocket also solves the earlier problem of single stages performing better in the atmosphere than in space. 
+\newpage
+\subsection{The Bell Nozzle}
+The bell nozzle takes high energy gas travelng in all directions and streamlines it so the gasses are flowing in one direction.
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 150px]{nozzle}
+    \label{fig:nozzle}
+    \caption{The Bell Nozzle}
+\end{figure}
+
+The pressure near the constriction of the nozzle is of the order of hundred bars of pressure. As the area of cross section increases, the pressure drops in almost proportion to the area. While traveling in the atmosphere, the pressure required at the end of the nozzle is nearly 1 bar while the nozzle used in space must have the exhaust pressure near zero. As can be seen from the pictures below, the vacuum nozzle is clearly much larger in size than its atmospheric counterpart.
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 200px]{comp}
+    \label{fig:comp}
+    \caption{Size Difference between a Sea Level and a Vacuum Nozzle}
+\end{figure}
+
+These are images of Spacex's Merlin engines. A few more on the rocket to give a good idea of how big they actually are:
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 220px]{nineboosters}
+    \label{fig:nineboosters}
+    \caption{Nine Sea Level Engines on First Stage}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 250px]{vacuumnozzle}
+    \label{fig:vacuumnozzle}
+    \caption{One Vacuum Engine on the Second Stage}
+\end{figure}
+
+So multistage rockets can be used to "switch" the nozzle type upon exiting the atmosphere for better performance in space. Another type of nozzle called the aerospike is a nozzle that can theoretically perform optimally in both atmospheric and vacuum conditions. Its design is such that its area of cross seaction changes dynamically with external pressure. It has its own drawbacks and as of today has not been used in an actual flight.
+
+\newpage
+
+\section{Week 7}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

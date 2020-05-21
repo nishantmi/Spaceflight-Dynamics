@@ -1,0 +1,39 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{bigints}
+
+\graphicspath{ {image/} } 
+
+\begin{document}
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=\textwidth]{two}
+\end{figure}
+
+Taking assumptions as in diagram. Applying angular momentum conservation about center of mass:
+\[
+	M_aV_a = M_bV_b
+\]
+
+Using gravitational law:
+\begin{gather*}
+\frac{GM_aM_b}{(r_a + r_b)^2} = M_a\frac{v_a^2}{r_a}\\
+\frac{GM_aM_b}{(r_a + r_b)^2} = M_b\frac{v_b^2}{r_b}
+\end{gather*}
+
+Assuming circular motion and time period as T, we also have:
+
+\begin{gather*}
+TV_a = 2\pi r_a\\
+TV_b = 2\pi r_b
+\end{gather*}
+
+Combining these equations, we get:
+\begin{gather*}
+M_a = \frac{V_a(V_a+V_b)^2 T}{2 \pi G}\\
+M_b = \frac{V_b(V_a+V_b)^2 T}{2 \pi G}
+\end{gather*}
+
+\end{document}
