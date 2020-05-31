@@ -5,6 +5,13 @@
 \usepackage{tabularx}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 
 \graphicspath{ {images/} } 
 
@@ -24,7 +31,7 @@ Mentor - Abhishek Raghuvanshi}
 \end{figure}
 
 \begin{abstract}
-Spaceflight Dynamics is the science of spacecraft peformance, stability and control. It invloves he modeling of the changing position and orientation of a vehicle i.e. its trajectory via analysis of different ballistic and cellestial forces acting upon the six different degrees of freedom of a body. This project 
+Spaceflight Dynamics is the science of spacecraft performance, stability and control. It involves the modelling of the changing position and orientation of a vehicle i.e. its trajectory via analysis of different ballistic and celestial forces acting upon the six different degrees of freedom of a body. This project 
 \end{abstract}
 
 \newpage
@@ -33,16 +40,16 @@ Spaceflight Dynamics is the science of spacecraft peformance, stability and cont
 \newpage
 \section{Introduction - Setting up the Groundwork}
 \subsection{Particle Dynamics}
-To understand the dynmamics of a spcaecraft, we must first set up the basis of our study and laydown the basic tools we shall be using to understand and analyse more complex problems. It all starts with Newtons Three Laws:
+To understand the dynamics of a spacecraft, we must first set up the basis of our study and lay down the basic tools we shall be using to understand and analyse more complex problems. It all starts with Newtons Three Laws:
 \begin{enumerate}
 
-	\item A particle at rest remains in rest, and a partical in motion remains in motion, if the applied force is zero.
+	\item A particle at rest remains in rest, and a particle in motion remains in motion, if the applied force is zero.
 	\item The force on a particle equals the mass of the particle times its inertial acceleration.
 	\item For every force applied, there is an equal and opposite reaction force.
 
 \end{enumerate}
 
-I need not go into the details and explanation of these, we all know their implications, nuances and caveats. Another important set of laws in our analysis are the ones layed down by Keppler. They are as follows:
+I need not go into the details and explanation of these, we all know their implications, nuances and caveats. Another important set of laws in our analysis are the ones laid down by Keppler. They are as follows:
 \begin{enumerate}
 
 	\item The orbit of a planet is an ellipse with the Sun at one of the two foci.
@@ -51,7 +58,7 @@ I need not go into the details and explanation of these, we all know their impli
 
 \end{enumerate}
 
- These laws were written down by Keppler after detail study and observation of our solar system, hence they describe the motion of planets in our solar system. However these are applicable to a much more genral case of the Two Body Problem. We shall see the same in that section. I shall now focus on building upon the math involved in applying these laws when in frames other than the inertial frame.
+ These laws were written down by Keppler after detail study and observation of our solar system, hence they describe the motion of planets in our solar system. However these are applicable to a much more general case of the Two Body Problem. We shall see the same in that section. I shall now focus on building upon the math involved in applying these laws when in frames other than the inertial frame.
 
 For starters, let us define the frame $i$ as the inertial frame and $s$ as the non-inertial frame. Now a vector $\mathbf{A}$ can be expressed in the inertial frame as:
 
@@ -218,7 +225,7 @@ Also, via the differentiation rule and using the rotation matrix defined above, 
 \dot{\mathbf{b_i}} = \mathbf{\omega^{bi}}\times\mathbf{b_i}
 \end{displaymath}
 
-These complete the necessary equations required to completely analyse the rotational motion of a system. There are other tequniques such as quaternion rotation that are alternatives to Euler's angles that are helpfull and advantageous in certin case senarios. Given this we are now ready to start further analysis of more complex systems. We shall start with the famous two body problem.
+These complete the necessary equations required to completely analyse the rotational motion of a system. There are other tequniques such as \href{https://en.wikipedia.org/wiki/Quaternion}{quaternion rotation} that are alternatives to Euler's angles that are advantageous in certin case senarios. \href{https://quaternions.online}{Here} is an online tool that shows the relation between quaternions and Euler's Angles. Given this we are now ready to start further analysis of more complex systems. We shall start with the famous two body problem.
 
 \newpage
 \section{The Two Body Problem}
@@ -714,8 +721,114 @@ So multistage rockets can be used to "switch" the nozzle type upon exiting the a
 
 \newpage
 
-\section{Week 7}
+\section{Re-entry Dynamics}
+Getting space crafts to safely return back to Earth is certainly essential for manned vehicles, but the concept behind it is much more essential for futuristic inter-planetary travel ideas. The problem is that orbiting objects have extremely high kinetic energy per unit mass. This must obviously be reduced significantly as the craft approaches the Earths's surface. This can be done actively through using rocket engines, passively using the drag force of the atmosphere or a combination of the both. The drag reduces kinetic energy according to the equation $\Dot{T} = \mathbf{D} \cdot \mathbf{v}$. Considering the atmosphere to be exponential and flight hypersonic, the drag force can be given as: 
+\[
+	\mathbf{D} = - \frac{1}{2} C_d A V^2 \rho_0 e ^ {-H/H_0} \hat{\mathbf{v}}
+\]
 
+Plugging that in shows that the byproduct of drag is a tremendous amount of heat. Hence one of our contraints while making the re-entry trajectory is to minimise heat production. 
+
+\subsection{Steep Ballistic Descent}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=150px]{entryForces}
+  \caption{Forces applied on Re-entry}
+  \label{fig:forces}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=150px]{entryFrame}
+  \caption{Frame used for Equations}
+  \label{fig:frame}
+\end{subfigure}
+\caption{Ballistic Re-entry}
+\label{fig:entry}
+\end{figure}
+
+\newpage
+
+We shall use the frame as shown in Figure \ref{fig:frame}. The equations are as follows:
+
+\[
+	\frac{dX}{dt} = V\: cos\:\gamma
+\]
+\[
+	\frac{dH}{dt} = V \:sin\:\gamma
+\]
+\[
+	m\frac{dV}{dt} = -D - mg \:sin\:\gamma
+\]
+\[
+	mV\frac{d\gamma}{dt} = -mg\:cos\:\gamma
+\]
+
+Solving these equations by substituting above value of drag force. We assume we have a very steep angle of entry and that the angle changes very little over time. Also, the velocity can be assumed to be quite large for most part of the trajectory. This gives us:
+\[
+	T = \left[ B_0 + mgH_0 E_i(K_D \rho) \right]e ^{-K_D\rho}
+\]
+Where $E_i$ is the exponential integral function given by:
+\[
+	E_i(x) = \int_{-\infty}^{x} \frac{e^t}{t} dt
+\]
+And $K_d$ is given by:
+\[
+	K_D = -\frac{C_D A H_0}{m\: sin\: \gamma_i}
+\]
+
+We now endeavour to calculate the maximum acceleration experienced by the craft. This can be done by approximating the above function using the Taylor's Expansion and a few approximations. 
+\[
+	a_{max} = \frac{V_0^2 sin\:\gamma_i}{2H_0e}
+\]
+
+Plugging in a few values shows that this is not suitable for manned vehicles(upto 160g's!). Let's see what happens at a shallower angle of re-entry.
+
+\subsection{Ballistic Re-entry}
+We start out with the same equations but introducing centripetal acceleration as well.
+
+\[
+	\frac{dH}{dt} = V \:sin\:\gamma
+\]
+\[
+	\frac{dV}{dt} = - \frac{1}{2} \frac{C_d A V^2}{m} \rho_0 e ^ {-H/H_0} - \left( g -\frac{V^2cos^2\gamma}{R_0 + H} \right) \:sin\:\gamma
+\]
+\[
+	V\frac{d\gamma}{dt} = -\left( g -\frac{V^2cos^2\gamma}{R_0 + H} \right)\:cos\:\gamma
+\]
+
+Now for small angles, $cos\:\gamma \approx 1$ and $sin\:\gamma \approx \gamma$. Also, $H<<R_0$, the radius of the Earth. We can also neglect the small component of gravity compared to drag. Reducing above equations according to these approximations and solving via numerical techniques and mathematical approximations gives us the maximum deceleration under some genral conditions as:
+\[
+	\frac{a_{max}}{g} \approx 8.3
+\]
+The maximum limit of the human body is around 8 times the acceleration due to gravity. The maximum deceleration is reduced by integrating lift or powered descent into the equation. By staying at higher altitudes for longer, the re-entry spans a longer duration but provides more "drag time" thereby reducing the maximum deceleration as well as reduces the heating rate of the craft. With the combination of lift and drag many techniques such as the \href{https://en.wikipedia.org/wiki/Boost-glide}{Skip Re-entry} have been devised for optimal re-entry. Re-entry isn't just a problem of getting objects back to Earth, getting objects like rovers to land on planets such as Mars is also a subset of this problem. Many interesting algorithams like the Polynomial Descent Gradient have been developed. An animation of the deployment of the rover Curiosity on Mars can be seen \href{https://www.youtube.com/watch?v=gwinFP8_qIM}{here}.
+
+\subsection{Re-entry Corridor}
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width = 280px]{corridor}
+    \label{fig:corridor}
+    \caption{Re-entry Corridor}
+\end{figure}
+
+The re-entry corridor's upper boundry is defined by the boundry above which the vehicle risks "bouncing" off the atmosphere and back into space i.e. it is unable to slow down enough to be dragged down. The lower boundry is defined by conditions like maximum decelaration and maximum heating rate the craft can handle. These two depend on the inital entry angle $\gamma_i$ and the re-entry velocity as shown in the first subsection. These parameters along with the design are tweaked so that the corridor is such that the Guidance, Control and Navigation System(GNC) can safely carry the craft through the corridor. Below is a table that shows the tradeoff between the various quantities.
+
+\begin{figure}[ht]
+	\centering
+    \includegraphics[width=\textwidth]{tradeoff}
+    \label{fig:tradeoff}
+    \caption{Tradeoff between re-entry parameters}
+\end{figure}
+
+
+\newpage
+
+\section{Bibliography}
+
+% url:
+% https://www.faa.gov/about/office_org/headquarters_offices/avs/offices/aam/cami/library/online_libraries/aerospace_medicine/tutorial/media/iii.4.1.7_returning_from_space.pdf
 
 
 \end{document}
