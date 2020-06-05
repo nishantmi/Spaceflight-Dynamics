@@ -11,7 +11,7 @@
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Parabolic Orbit}{subsection.3.1}% 11
 \BOOKMARK [3][-]{subsubsection.3.1.3}{Hyperbolic Orbit}{subsection.3.1}% 12
 \BOOKMARK [2][-]{subsection.3.2}{Orbital Elements}{section.3}% 13
-\BOOKMARK [1][-]{section.4}{Some Title}{}% 14
+\BOOKMARK [1][-]{section.4}{Other Considerations}{}% 14
 \BOOKMARK [2][-]{subsection.4.1}{Aerodynamics}{section.4}% 15
 \BOOKMARK [2][-]{subsection.4.2}{A Few Considerations about Space}{section.4}% 16
 \BOOKMARK [3][-]{subsubsection.4.2.1}{Spacecraft Temperature}{subsection.4.2}% 17
@@ -19,7 +19,7 @@
 \BOOKMARK [1][-]{section.5}{Inter - Planetary Motion}{}% 19
 \BOOKMARK [2][-]{subsection.5.1}{Hohmann Transfer}{section.5}% 20
 \BOOKMARK [2][-]{subsection.5.2}{Launch Windows}{section.5}% 21
-\BOOKMARK [2][-]{subsection.5.3}{Planetary Flby}{section.5}% 22
+\BOOKMARK [2][-]{subsection.5.3}{Planetary Flyby}{section.5}% 22
 \BOOKMARK [1][-]{section.6}{Rocket Dynamics}{}% 23
 \BOOKMARK [2][-]{subsection.6.1}{The Rocket Equation}{section.6}% 24
 \BOOKMARK [2][-]{subsection.6.2}{Multistage Rockets}{section.6}% 25
@@ -28,4 +28,7 @@
 \BOOKMARK [2][-]{subsection.7.1}{Steep Ballistic Descent}{section.7}% 28
 \BOOKMARK [2][-]{subsection.7.2}{Ballistic Re-entry}{section.7}% 29
 \BOOKMARK [2][-]{subsection.7.3}{Re-entry Corridor}{section.7}% 30
-\BOOKMARK [1][-]{section.8}{Bibliography}{}% 31
+\BOOKMARK [1][-]{section.8}{Mission Analysis}{}% 31
+\BOOKMARK [2][-]{subsection.8.1}{The Voyager Mission}{section.8}% 32
+\BOOKMARK [2][-]{subsection.8.2}{Falcon 9's Landing}{section.8}% 33
+\BOOKMARK [1][-]{section.9}{Bibliography}{}% 34
